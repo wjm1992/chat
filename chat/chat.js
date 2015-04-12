@@ -1,7 +1,7 @@
 var express = require("express");
 var fs = require("fs");
 var app = express();
-var port = 3700;
+var port = 80;
 
 var allUsers = [];
 var allGroups = {};
