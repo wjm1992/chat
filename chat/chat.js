@@ -10,6 +10,8 @@ var allClientSockets = {};
 var allSocketByUser = {};
 var adminByGroup = {};
 
+var dataBlockSize = 10240;
+
 app.set('views',__dirname+'/tpl');
 app.set('view engine',"ejs");
 //app.engine('jade',require('jade').__express);
@@ -179,7 +181,7 @@ io.sockets.on('connection', function (socket){
 					if(stat.isFile())
 					{
 						allFiles[filename].downloaded = stat.size;
-						place = stat.size / 524288;
+						place = stat.size / dataBlockSize;
 					}
 				}
 				catch(err){}
@@ -218,14 +220,14 @@ io.sockets.on('connection', function (socket){
 			{
 				fs.write(file.handler,file.data,null,'Binary',function(err,written){
 					file.data = "";//reset buffer
-					var place = file.downloaded / 524288;
+					var place = file.downloaded / dataBlockSize;
 					var percent = file.downloaded/file.size *100;
 					socket.emit('moreData',{place:place,percent:percent});
 				});
 			}
 			else
 			{
-				var place = file.downloaded/524288;
+				var place = file.downloaded/dataBlockSize;
 				var percent = file.downloaded/file.size*100;
 				socket.emit('moreData',{place:place,percent:percent});
 			}
