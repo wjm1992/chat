@@ -9,6 +9,8 @@ var groupId = -1;
 var username
 var sendMediaButton;
 
+var dataBlockSize = 10240;
+
 function getExtension(filename)
 {
 	var parts = filename.split(".");
@@ -328,17 +330,17 @@ window.onload = function() {
 	var progressBar = document.getElementById("progress");
 	
 	socket.on('moreData',function(data){
-		var place = data.place * 524288;
+		var place = data.place * dataBlockSize;
 		var newFile;
 		progressBar.innerHTML = data.percent +"%";
 		
 		if(file.slice)
 		{
-			newFile = file.slice(place,place+Math.min(524288,(file.size-place)));
+			newFile = file.slice(place,place+Math.min(dataBlockSize,(file.size-place)));
 		}
 		else
 		{
-			newFile = file.mozSlice(place,place+Math.min(524288,(file.size-place)));
+			newFile = file.mozSlice(place,place+Math.min(dataBlockSize,(file.size-place)));
 		}
 		reader.readAsBinaryString(newFile);
 	});
