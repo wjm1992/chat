@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node chat</title>
+	<script type="text/javascript" src="client.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<link href="/video-js/video-js.css"/>
+	<script src="/video-js/video.js"></script>
+	<script>
+		videojs.options.flash.swf = "/video-js/video-js.swf";
+	</script>
+	<style type="text/css">
+	#loginDiv
+	{
+		background-color:white;
+		position:fixed;
+		width:350px;
+		height:50px;
+		left:0;
+		right:0;
+		top:50%;
+		border:solid 2px grey;
+		margin-left: auto;
+		margin-right:auto;
+		z-index:10;
+	}
+	#cover
+	{
+		position:fixed;
+		top:0;
+		left:0;
+		background:rgba(0,0,0,0.6);
+		z-index:5;
+		width:100%;
+		height:100%;
+	}
+	#members
+	{
+		width:90%;
+		border:solid 2px black;
+	}
+	.chatMember
+	{
+		margin:5px 5px 5px 5px;
+		border: solid 1px black;
+		height:25px;
+	}
+	#dropZone
+	{
+		width:90%;
+		height:100px;
+		border:solid 2px gray;
+	}
+	.banButton
+	{
+		float:right;
+	}
+	.msgImage
+	{
+		width:80%;
+	}
+	#content
+	{
+		width: 60vw; 
+		height: 90vh; 
+		margin: 0 0 20px 0; 
+		border: solid 1px #999; 
+		overflow-y: scroll;
+		position: relative;
+	}
+	#controls
+	{
+		position:absolute;
+		margin-top:20px;
+		top:0px;
+		right:50px;
+		width:400px;
+	}
+	.msgVideo
+	{
+		width:80%;
+	}
+	</style>
+</head>
+<body>
+	<div id="cover"></div>
+	<div id="loginDiv">
+		Name:<input id="name" style="width:300px;"/>
+		<input id="login" type="button" value="login"/>
+		<p id="loginResult"></p>
+	</div>
+	<div id="content" ></div>
+	<div id="controls">
+		<input id="field" style="width: 350px;"/>
+		<input id="send" type="button" value="send"/>
+		<br/>
+		<div id="dropZone">Drop image/video here</div>
+		<output id="list" style="width: 350px"></output>
+		<input id="sendMedia" type="button" value="Send image/video"/>
+		Progress:<p id="progress">0%</p>
+		<br/>
+		Participated users:
+		<div id="members"></div>
+		<div id="userSearch">
+			<input id="searchName" style="width: 300px"/>
+			<input id="invite" type="button" value="invite"/>
+			<p id="inviteResult"></p>
+		</div>
+	</div>
+	
+</body>
+</html>
