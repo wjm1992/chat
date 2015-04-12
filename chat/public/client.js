@@ -47,7 +47,7 @@ function isVideo(file)
 	return false;
 }
 
-var sitePath = "http://localhost:3700";
+var sitePath = "http://54.187.54.107:80";
 
 window.onload = function() {
 	socket = io.connect(sitePath);
